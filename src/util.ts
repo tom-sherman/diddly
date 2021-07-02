@@ -1,4 +1,4 @@
-export type Join<A extends readonly unknown[], B extends readonly unknown[]> = {
+export type Zip<A extends readonly unknown[], B extends readonly unknown[]> = {
   [K in keyof A]: K extends keyof B ? [A[K], B[K]] : never;
 };
 

@@ -1,5 +1,5 @@
 import type { Container, Factory } from './container';
-import type { Join, MapTupleTo, TupleO, TupleToObject } from './util';
+import type { Zip, MapTupleTo, TupleO, TupleToObject } from './util';
 
 // I don't think this is needed because our container is immutable? We could feasibly make all factories singletons?
 // ie. we could transparently cached all dependency resolutions as the tree is never going to change
@@ -25,7 +25,7 @@ export function func<
 ): Factory<
   () => TReturn,
   Container<
-    TupleO<Extract<Join<TDependencies, TParams>, readonly [string, any][]>>
+    TupleO<Extract<Zip<TDependencies, TParams>, readonly [string, any][]>>
   >
 > {
   return (container) => {
@@ -51,7 +51,7 @@ export function construct<
 ): Factory<
   TClass,
   Container<
-    TupleO<Extract<Join<TDependencies, TParams>, readonly [string, any][]>>
+    TupleO<Extract<Zip<TDependencies, TParams>, readonly [string, any][]>>
   >
 > {
   return (container) =>
