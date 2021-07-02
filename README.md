@@ -1,4 +1,6 @@
-# ts-di - Pure functional dependency injection for TypeScript
+# ts-di
+
+> Pure functional dependency injection for TypeScript
 
 **NOTE: This library is very experimental and at the point of writing only typechecks, it doesn't do anything at runtime apart from always throw an error 😳**
 
