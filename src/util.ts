@@ -2,10 +2,6 @@ export type Zip<A extends readonly unknown[], B extends readonly unknown[]> = {
   [K in keyof A]: K extends keyof B ? [A[K], B[K]] : never;
 };
 
-export type TupleToObject<T extends [string, any]> = {
-  [key in T[0]]: Extract<T, [key, any]>[1];
-};
-
 export type MapTupleTo<T extends readonly unknown[], U> = { [K in keyof T]: U };
 
 // type Merge<A extends {}, B extends {}> = {

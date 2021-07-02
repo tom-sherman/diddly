@@ -1,5 +1,5 @@
 import type { Container, Factory } from './container';
-import type { Zip, MapTupleTo, TupleO, TupleToObject } from './util';
+import type { Zip, MapTupleTo, TupleO } from './util';
 
 // I don't think this is needed because our container is immutable? We could feasibly make all factories singletons?
 // ie. we could transparently cached all dependency resolutions as the tree is never going to change
