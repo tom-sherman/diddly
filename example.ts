@@ -1,5 +1,5 @@
-import { construct, func, value } from './combinators';
-import { createContainer } from './container';
+import { construct, func, value } from './src/combinators';
+import { createContainer } from './src/container';
 
 function printNameAndAge(name: string, age: number) {
   console.log(`${name} is aged ${age}`);
