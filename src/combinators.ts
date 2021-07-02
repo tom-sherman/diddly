@@ -1,8 +1,11 @@
 import type { Container, Factory } from './container';
 import type { Zip, MapTupleTo, TupleO } from './util';
 
-// I don't think this is needed because our container is immutable? We could feasibly make all factories singletons?
-// ie. we could transparently cached all dependency resolutions as the tree is never going to change
+/**
+ * Takes a factory and ensures that once it is resolved once, subsequent resolutions do not invoke the factory but instead return the previously resolved value.
+ *
+ * This is useful for factories that may have side effects or are expensive to execute.
+ */
 export function singleton<TVal, TDependencies extends Record<string, unknown>>(
   factory: Factory<TVal, Container<TDependencies>>
 ): Factory<TVal, Container<TDependencies>> {
@@ -15,6 +18,9 @@ export function singleton<TVal, TDependencies extends Record<string, unknown>>(
   };
 }
 
+/**
+ * Define a function and it's dependencies. Dependecies must be total ie. does not (yet) support partial application of the function.
+ */
 export function func<
   TParams extends readonly unknown[],
   TReturn,
@@ -37,10 +43,18 @@ export function func<
   };
 }
 
+/**
+ * Simply lifts the dependency into the container.
+ */
 export function value<TVal>(val: TVal): Factory<TVal, Container<{}>> {
   return () => val;
 }
 
+/**
+ * Returns an instantiated `TClass` that has been constructed with the dependencies.
+ *
+ * Similar to func but for classes.
+ */
 export function construct<
   TParams extends readonly unknown[],
   TClass,
