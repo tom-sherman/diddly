@@ -13,7 +13,8 @@
     "build": "microbundle",
     "dev": "microbundle watch",
     "typecheck": "tsc --noEmit",
-    "format": "prettier --write {*.{js,ts},src/**/*.ts,src/*.ts}"
+    "format": "prettier --write {*.{js,ts},src/**/*.ts,src/*.ts}",
+    "docs": "typedoc --out docs --excludeInternal --excludePrivate --includeVersion src/ts-di.ts"
   },
   "keywords": [],
   "author": "Tom Sherman <the.tomsherman@gmail.com> (https://tom-sherman.com/)",
@@ -27,6 +28,7 @@
     "jest": "^27.0.6",
     "microbundle": "^0.13.3",
     "prettier": "^2.3.1",
+    "typedoc": "^0.21.2",
     "typescript": "^4.3.4"
   }
 }

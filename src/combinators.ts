@@ -5,6 +5,8 @@ import type { Zip, MapTupleTo, TupleO } from './util';
  * Takes a factory and ensures that once it is resolved once, subsequent resolutions do not invoke the factory but instead return the previously resolved value.
  *
  * This is useful for factories that may have side effects or are expensive to execute.
+ *
+ * @param factory The factory to create a singleton from.
  */
 export function singleton<TVal, TDependencies extends Record<string, unknown>>(
   factory: Factory<TVal, Container<TDependencies>>
@@ -19,7 +21,22 @@ export function singleton<TVal, TDependencies extends Record<string, unknown>>(
 }
 
 /**
- * Define a function and it's dependencies. Dependecies must be total ie. does not (yet) support partial application of the function.
+ * Declare a function and it's dependencies.
+ *
+ * @param fn The function to register.
+ * @param args Dependency names that declare the arguments of `fn`. Must be total ie. does not (yet) support partial application of the function.
+ *
+ * @example
+ *
+ * ```ts
+ * function logNameAndAge(name: string, age: number) {
+ *   console.log(`${name} is ${age} years old`);
+ * }
+ *
+ * container.register(
+ *   func('logNameAndAge', logNameAndAge, 'someName, 'someAge')
+ * );
+ * ```
  */
 export function func<
   TParams extends readonly unknown[],
@@ -45,6 +62,14 @@ export function func<
 
 /**
  * Simply lifts the dependency into the container.
+ *
+ * @example
+ *
+ * ```ts
+ * container.register(
+ *   value('someValue', 5)
+ * );
+ * ```
  */
 export function value<TVal>(val: TVal): Factory<TVal, Container<{}>> {
   return () => val;
@@ -54,6 +79,24 @@ export function value<TVal>(val: TVal): Factory<TVal, Container<{}>> {
  * Returns an instantiated `TClass` that has been constructed with the dependencies.
  *
  * Similar to func but for classes.
+ *
+ * @param constructor The class
+ *
+ * @example
+ *
+ * ```ts
+ * class Logger {
+ *   constructor(private prefix: string) {}
+ *
+ *   log(message: any) {
+ *     console.log(`${this.prefix} - ${message}`);
+ *   }
+ * }
+ *
+ * container.register(
+ *   construct('logger', Logger, 'somePrefix')
+ * );
+ * ```
  */
 export function construct<
   TParams extends readonly unknown[],

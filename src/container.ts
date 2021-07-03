@@ -1,7 +1,19 @@
 export interface Container<TDependencies extends Record<string, unknown>> {
+  /**
+   * Resolve a dependency from the container.
+   *
+   * @param name The name of the dependency.
+   */
   readonly resolve: <TName extends keyof TDependencies>(
     name: TName
   ) => TDependencies[TName];
+
+  /**
+   * Register a new dependency.
+   *
+   * @param name The name of the dependency.
+   * @param dependency A dependency factory.
+   */
   readonly register: <TName extends string, TDependency>(
     name: TName,
     dependency: Factory<TDependency, Container<TDependencies>>
@@ -21,6 +33,9 @@ export type Factory<
   TContainer extends Container<Record<string, unknown>>
 > = (container: TContainer) => T;
 
+/**
+ * Creates an empty DI container.
+ */
 export function createContainer(): Container<{}> {
   return _createContainer({});
 }
