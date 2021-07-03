@@ -1,7 +1,7 @@
 {
   "name": "ts-di",
   "version": "1.0.0",
-  "description": "",
+  "description": "Pure functional dependency injection for TypeScript",
   "source": "./src/ts-di.ts",
   "exports": "./dist/ts-di.modern.js",
   "main": "./dist/ts-di.js",
