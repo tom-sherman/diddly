@@ -1,8 +1,8 @@
 export interface Container<TDependencies extends Record<string, unknown>> {
-  resolve: <TName extends keyof TDependencies>(
+  readonly resolve: <TName extends keyof TDependencies>(
     name: TName
   ) => TDependencies[TName];
-  register: <TName extends string, TDependency>(
+  readonly register: <TName extends string, TDependency>(
     name: TName,
     dependency: Factory<TDependency, Container<TDependencies>>
   ) => Container<
@@ -22,5 +22,19 @@ export type Factory<
 > = (container: TContainer) => T;
 
 export function createContainer(): Container<{}> {
-  throw new Error('Not implemented yet');
+  return _createContainer({});
+}
+
+function _createContainer(deps: any): Container<any> {
+  return {
+    register(n, dep) {
+      return _createContainer({
+        ...deps,
+        [n]: dep,
+      });
+    },
+    resolve(name) {
+      return deps[name](this);
+    },
+  };
 }
