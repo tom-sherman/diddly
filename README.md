@@ -1,4 +1,4 @@
-# ts-di
+# diddly
 
 > Pure functional dependency injection for TypeScript
 
@@ -14,7 +14,7 @@
 ## Example
 
 ```ts
-import { createContainer } from 'ts-di';
+import { createContainer } from 'diddly';
 
 function printNameAndAge(name: string, age: number) {
   console.log(`${name} is aged ${age}`);
