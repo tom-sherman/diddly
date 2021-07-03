@@ -8,6 +8,9 @@
   "module": "./dist/diddly.module.js",
   "unpkg": "./dist/diddly.umd.js",
   "types": "./dist/diddly.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "jest",
     "build": "microbundle",
@@ -17,9 +20,17 @@
     "docs": "typedoc --out docs --excludeInternal --excludePrivate --includeVersion src/diddly.ts",
     "prepublish": "npm run typecheck && npm run test && npm run build"
   },
-  "keywords": [],
+  "keywords": [
+    "di",
+    "dependency injection",
+    "ioc"
+  ],
   "author": "Tom Sherman <the.tomsherman@gmail.com> (https://tom-sherman.com/)",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tom-sherman/diddly.git"
+  },
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@babel/preset-env": "^7.14.7",
