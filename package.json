@@ -2,9 +2,18 @@
   "name": "ts-di",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "source": "./src/ts-di.ts",
+  "exports": "./dist/ts-di.modern.js",
+  "main": "./dist/ts-di.js",
+  "module": "./dist/ts-di.module.js",
+  "unpkg": "./dist/ts-di.umd.js",
+  "types": "./dist/ts-di.d.ts",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "microbundle",
+    "dev": "microbundle watch",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write {*.{js,ts},src/**/*.ts,src/*.ts}"
   },
   "keywords": [],
   "author": "Tom Sherman <the.tomsherman@gmail.com> (https://tom-sherman.com/)",
@@ -16,6 +25,7 @@
     "@types/jest": "^26.0.23",
     "babel-jest": "^27.0.6",
     "jest": "^27.0.6",
+    "microbundle": "^0.13.3",
     "prettier": "^2.3.1",
     "typescript": "^4.3.4"
   }
