@@ -41,7 +41,7 @@ export function singleton<TVal, TDependencies extends Record<string, unknown>>(
 export function func<
   TParams extends readonly unknown[],
   TReturn,
-  TDependencies extends MapTupleTo<TParams, string>
+  TDependencies extends readonly string[]
 >(
   fn: (...args: TParams) => TReturn,
   ...args: TDependencies
@@ -52,10 +52,11 @@ export function func<
   >
 > {
   return (container) => {
-    return () =>
+    return (...curriedArgs) =>
       fn(
         // @ts-expect-error
-        ...args.map((arg) => container.resolve(arg))
+        ...args.map((arg) => container.resolve(arg)),
+        ...curriedArgs
       );
   };
 }

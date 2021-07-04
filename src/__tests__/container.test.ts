@@ -65,6 +65,15 @@ describe('func', () => {
     expect(fn1()).toBe(5);
     expect(fn2()).toBe(6);
   });
+
+  test('supports partial application of 1 on function with 2 params', () => {
+    const add = (a: number, b: number) => a + b;
+    const container = createContainer()
+      .register('one', value(1))
+      .register('addOne', func(add, 'one'));
+
+    expect(container.resolve('addOne')(2)).toBe(3);
+  });
 });
 
 describe('value', () => {
