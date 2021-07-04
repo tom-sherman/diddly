@@ -18,7 +18,7 @@
     "typecheck": "tsc --noEmit",
     "format": "prettier --write {*.{js,ts},src/**/*.ts,src/*.ts}",
     "docs": "typedoc --out docs --excludeInternal --excludePrivate --includeVersion src/diddly.ts",
-    "prepublish": "npm run typecheck && npm run test && rm -rf dist && npm run build"
+    "prepublishOnly": "npm run typecheck && npm run test && rm -rf dist && npm run build"
   },
   "keywords": [
     "di",
