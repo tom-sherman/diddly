@@ -1,6 +1,6 @@
 {
   "name": "diddly",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Pure functional dependency injection for TypeScript",
   "source": "./src/diddly.ts",
   "exports": "./dist/diddly.modern.js",
