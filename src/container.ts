@@ -1,4 +1,6 @@
-export interface Container<TDependencies extends Record<string, unknown>> {
+export interface Container<
+  TDependencies extends Record<string | symbol, unknown>
+> {
   /**
    * Resolve a dependency from the container.
    *
@@ -14,7 +16,7 @@ export interface Container<TDependencies extends Record<string, unknown>> {
    * @param name The name of the dependency.
    * @param dependency A dependency factory.
    */
-  readonly register: <TName extends string, TDependency>(
+  readonly register: <TName extends string | symbol, TDependency>(
     name: TName,
     dependency: Factory<TDependency, Container<TDependencies>>
   ) => Container<
@@ -30,7 +32,7 @@ export interface Container<TDependencies extends Record<string, unknown>> {
 
 export type Factory<
   T,
-  TContainer extends Container<Record<string, unknown>>
+  TContainer extends Container<Record<string | symbol, unknown>>
 > = (container: TContainer) => T;
 
 /**

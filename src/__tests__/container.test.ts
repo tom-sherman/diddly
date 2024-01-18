@@ -7,6 +7,13 @@ test('can register a dependency', () => {
   expect(container.resolve('foo')).toBe(5);
 });
 
+test('can register a symbol as the name for a dependency', () => {
+  const name = Symbol.for('foo');
+  const container = createContainer().register(name, () => 5);
+
+  expect(container.resolve(name)).toBe(5);
+});
+
 test('re-registering the same dependency overwrites it', () => {
   const container = createContainer()
     .register('foo', () => 5)
